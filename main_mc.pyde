@@ -24,7 +24,7 @@
 d_max_rocket_count = 5                   #макс. количество ракет на карте НА СТАРТЕ ИГРЫ (в 1 тик)
 d_exp_radius_tolerance = 40              #радиус взрыва ракет игрока (влияет на сложность)
 d_difficulty_factor = 1.00               #/стартовый/ коэффициент начисления очков от сложности (влияет на очки)
-d_player_rocket_speed = 10                #скорость ракет игрока без бонусов
+d_player_rocket_speed = 10               #скорость ракет игрока без бонусов
 
 #Настройки графики
 d_draw_trails = True                     #отрисовка хвостов ракет
@@ -210,7 +210,7 @@ def setup():
     global rocket, missile
     global lucky38, arc_, tower, column_1, column_2, bridge, silo
     global lucky38_d, arc__d, tower_d, column_1_d, column_2_d, bridge_d
-    global crosshair, filter_, font, global_rocket_count, score, pause
+    global crosshair, filter_, font, font_credits, global_rocket_count, score, pause
     
     
     size(1440, 900)
@@ -220,6 +220,7 @@ def setup():
     frameRate(60) 
     
     font = loadFont("CenturyGothic-Bold-48.vlw")
+    font_credits = loadFont("GillSansMT-48.vlw")
     
 
     
@@ -302,7 +303,7 @@ def draw():
     global rocket, missile
     global lucky38, arc_, tower, column_1, column_2, bridge, silo
     global lucky38_d, arc__d, tower_d, column_1_d, column_2_d, bridge_d
-    global crosshair, font, pause
+    global crosshair, font, font_credits, pause
     global global_rocket_count, game_over, mouse_click_count, score
     
     background(39,37,30)                        #фон (темно-янтарный)
@@ -503,6 +504,15 @@ def draw():
         
     #print 'Towers:', destroyed [0], destroyed [1], destroyed [2], destroyed [3], destroyed [4], destroyed [5], destroyed [6], destroyed [7], '\t Game Over:', game_over
     image(crosshair, mouseX-15, mouseY-15)      #перекрестье курсосра
+    fill(255,255,255, 128)
+    stroke(255,255,255, 128)
+    textSize(12)
+    text("ROCKET COMMANDER", 10, height-30)
+    fill(200,200,200, 100)
+    stroke(200,200,200, 100)
+    text("A game by Dmitry Ryazantsev", 10, height-16)
+    fill(237,204,17)
+    stroke(237,204,17)
         
 
             
