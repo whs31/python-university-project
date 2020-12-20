@@ -10,10 +10,8 @@
 
 #TODO
 """
-наложение блюра при паузе и гамеовере
-самолетики
-бонусы для игрока
-фильтры цвета для уровней сложности (или виньетка)
+☑     наложение блюра при паузе и гамеовере
+
 """
 
 
@@ -38,7 +36,7 @@ d_draw_trails_p = True                   #отрисовка хвостов ра
 
 import time
 import random
-  
+
 
 
 """
@@ -216,12 +214,14 @@ def setup():
     
     
     size(1440, 900)
-    smooth()
+    smooth(4)
     noCursor()
     strokeWeight(2)
     frameRate(60) 
     
     font = loadFont("CenturyGothic-Bold-48.vlw")
+    
+
     
     lucky38 = loadImage("lucky38.png")                                                       #импорт картинок башенок
     arc_ = loadImage("arc.png")
@@ -269,6 +269,8 @@ def mousePressed():
         image(pause, width - 60, 10)  
         noTint()
         paused=True
+        filter(BLUR, 5)
+        filter(GRAY)
         fill(255,255,255)
         stroke(255,255,255)
         textSize(48)
@@ -276,13 +278,15 @@ def mousePressed():
         fill(200,200,200)
         stroke(200,200,200)
         textSize(20)
-        text("Any click to continue.", width/2-100, 325)
+        text("Click Pause to continue.", width/2-100, 325)
         fill(237,204,17)
         stroke(237,204,17)
         cursor()
         noLoop()
     elif paused==True:
         paused = False
+        filter(BLUR, 0)
+        filter(GRAY)
         noCursor()
         loop()
     if game_over==True:
@@ -351,6 +355,7 @@ def draw():
     #геймовер
     if game_over==True:
         textSize(60)
+        filter(BLUR, 5)
         fill(255,255,255)
         stroke(255,255,255)
         text("G   A   M   E       O   V   E   R", width/2-325, 300)
@@ -360,6 +365,7 @@ def draw():
         text("Any click to exit game.", width/2-100, 325)
         fill(237,204,17)
         stroke(237,204,17)
+        filter(GRAY)
         noLoop()
     for i in range (0, len(RocketArray)):                    #отрисовка массива ракет
         RocketArray[i].draw_()
@@ -433,7 +439,7 @@ def draw():
         stroke(255,231,10)
         text("Easy", 20, 50)
         fill(237,204,17)
-        stroke(237,204,17)
+        stroke(237,204,17)          
     if check_once[1] == False and check_once[2] == True:
         fill(255,243,134)
         stroke(255,243,134)
