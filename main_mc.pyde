@@ -11,7 +11,8 @@
 #TODO
 """
 ☑     наложение блюра при паузе и гамеовере
-
+☑     звук
+☑     табличка что это я все написал
 """
 
 
@@ -37,7 +38,9 @@ d_draw_trails_p = True                   #отрисовка хвостов ра
 import time
 import random
 
+add_library('beads')
 
+ac1 = AudioContext()
 
 """
 -------------ИГРОВЫЕ ПЕРЕМЕННЫЕ-----------------
@@ -222,7 +225,12 @@ def setup():
     font = loadFont("CenturyGothic-Bold-48.vlw")
     font_credits = loadFont("GillSansMT-48.vlw")
     
-
+    #**********************ИНИЦИАЛИЗАЦИЯ ЗВУКОВ**********************************
+    f_startsound = SampleManager.sample("/music1.mp3")
+    startsound = SamplePlayer(ac1, f_startsound)
+    g1 = Gain(ac1, 2, 0.1)
+    g1.addInput(startsound)
+    ac1.out.addInput(g1)
     
     lucky38 = loadImage("lucky38.png")                                                       #импорт картинок башенок
     arc_ = loadImage("arc.png")
@@ -259,7 +267,7 @@ def setup():
     time.gmtime(0)
     time.time()
     time.sleep(1)
-    
+    ac1.start()
 def mousePressed(): 
     global mouse_click_count, d_draw_trails_p, missile, pause, paused, game_over
     if mouseX < width-60 and mouseY > 60 and game_over==False:
@@ -514,6 +522,7 @@ def draw():
     fill(237,204,17)
     stroke(237,204,17)
         
-
+def stop():
+    ac1.stop()
             
     
